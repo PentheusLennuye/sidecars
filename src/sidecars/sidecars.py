@@ -1,4 +1,5 @@
-"""[A one-line summary of the module or program, ended with a period].
+#!/usr/bin/env python3
+"""Sidecars
 
 sidecars.py Copyright 2026 George Cummings
 
@@ -14,59 +15,54 @@ is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND
 implied. See the License for the specific language governing permissions and limitations under the
 License.
 
-
-Description:
-
-This module serves only to ensure that python unit testing can go ahead.
-
-Typical usage example:
-
-poetry run python -m pytest tests/unit
-
 """
 
-from typing import Any
+import logging
+import logging.handlers
+import socket
+import time
+from dataclasses import dataclass
 
-# For your own classes, lose the pylint disable comment below. It is only here as an example.
+LOG_HOST = "127.0.0.1"
+LOG_PORT = 5140
 
 
-class X:  # pylint: disable=too-few-public-methods
-    """Summary of class.
+@dataclass
+class Settings:
+    """The system configuration."""
 
-    Longer class information
+    debug: bool = True
 
-    Attributes:
-        thing_a:
-        thing_b:
-    """
 
-    def __init__(self):
-        """Initiate an X object.
+settings = Settings()
 
-        Args:
-            thing_a: description of thing_a
-            thing_b: description of thing_b
 
-        Returns:
-            object X
-        """
-        self.thing_a: Any = None
-        self.thing_b: Any = None
+def get_logger(app_name: str, environ: str, stream: str = "stderr") -> logging.Logger:
+    """Return a formatted, streaming non-root logger."""
 
-    def public_function(self, my_var: str) -> int | None:
-        """The summary of the function and it must end with a period followed by a blank line.
+    def stderr() -> logging.StreamHandler:
+        """Return a logging to console stderr."""
+        return logging.StreamHandler()
 
-        A deeper description if necessary but only if the information is useful. One should not
-        need to describe easy-to-understand algorithms but perhaps the reason for it.
+    def syslog() -> logging.handlers.SysLogHandler:
+        """Send logs over syslog TCP."""
+        return logging.handlers.SysLogHandler(
+            address=(LOG_HOST, LOG_PORT), socktype=socket.SOCK_STREAM
+        )
 
-        Args:
-            my_var: the value to send back.
+    logger = logging.getLogger(app_name)
+    logger.setLevel(getattr(logging, "DEBUG" if settings.debug else "INFO"))
+    handler = {"stderr": stderr, "syslog": syslog}[stream]()
+    handler.setFormatter(
+        logging.Formatter(r"%(name)s %(levelname)s %(asctime)s > %(message)s " + environ)
+    )
+    logger.addHandler(handler)
 
-        Returns:
-            A tail call returning the string case as an integer, or None. Yes, the programmer is
-            aware that this is Python and there is no advantage to a tail call.
-        """
-        try:
-            return int(my_var)
-        except ValueError:
-            return None
+    return logger
+
+
+if __name__ == "__main__":
+    top_logger = get_logger("sidecar_test", "dev", "stderr")
+    while True:
+        top_logger.info("ping")
+        time.sleep(5)

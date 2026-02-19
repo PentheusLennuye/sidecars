@@ -96,6 +96,7 @@ words = [
     "splitright",
     "stylelua",
     "stylua",
+    "syslog",
     "systemdlint",
     "tabclose",
     "tabn",
@@ -115,6 +116,9 @@ words = [
     "yamllint",
     "yamlls",
 ]
+ignore_paths = [
+    ".git/**/*",
+    "pyproject.toml",
+]
 ignore_patterns = ['\b[A-Z]{2,}\b']
-ignore_paths = [".git/**/*", "pyproject.toml"]
 use_global = false
