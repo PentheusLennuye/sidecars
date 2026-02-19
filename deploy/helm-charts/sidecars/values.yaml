@@ -20,8 +20,8 @@ global:
 sidecars:
   image:
     pullPolicy: Always
-    repository: gmc/sidecars
-    tag: latest
+    repository: pentheuslennuye/sidecars
+    tag: 0.1.0
   config:
     # logging defines the outgoing protocol and port to the sidecar
     logging:

@@ -19,14 +19,11 @@ spec:
             name: fluentd-config
       containers:
         - name: sidecars
-          image: |
-            {{.Values.sidecars.image.repository}}:{{.Values.sidecars.image.tag}}
-          imagePullPolicy: "{ { .Values.sidecars.image.pullPolicy } }"
+          image: "{{ .Values.sidecars.image.repository }}:{{ .Values.sidecars.image.tag }}"
+          imagePullPolicy: "{{ .Values.sidecars.image.pullPolicy }}"
         - name: logger
-          image: |
-            {{.Values.logger.image.repository}}:{{.Values.logger.image.tag}}
-          imagePullPolicy: "{ { .Values.logger.image.pullPolicy } }"
+          image: "{{ .Values.logger.image.repository }}:{{ .Values.logger.image.tag }}"
+          imagePullPolicy: "{{ .Values.logger.image.pullPolicy }}"
           volumeMounts:
             - name: fluentd-config-volume
-              mountPath: /fluentd/etc/fluent.conf
-              subPath: fluent.conf
+              mountPath: /fluentd/etc/

@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  labels:
+    app: sidecars
+data:
+  fluent.conf: |
+{{ tpl (.Files.Get "config/fluentd.conf.tpl") . | indent 4 }}

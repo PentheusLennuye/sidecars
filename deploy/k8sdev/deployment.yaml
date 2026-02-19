@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sidecars
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sidecars
+  template:
+    metadata:
+      labels:
+        app: sidecars
+    spec:
+      volumes:
+        - name: fluentd-config-volume
+          configMap:
+            name: fluentd-config
+      containers:
+        - name: sidecars
+          image: pentheuslennuye/sidecars:0.1.0
+          imagePullPolicy: Always
+        - name: logger
+          image: fluent/fluentd:v1.19-2
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: fluentd-config-volume
+              mountPath: /fluentd/etc/

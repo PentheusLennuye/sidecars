@@ -1,0 +1,24 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluentd-config
+  labels:
+    app: sidecars
+data:
+  fluent.conf: |
+    <source>
+      @type syslog
+      port 5140
+      bind 127.0.0.1
+      tag mqworker
+      <transport tcp>
+      </transport>
+      <parse>
+        @type syslog
+        message_format rfc3164
+      </parse>
+    </source>
+    <match **>
+      @type stdout
+    </match>
