@@ -1,0 +1,6 @@
+dependencies:
+- name: sidecars
+  repository: file://./sidecars
+  version: 0.1.0
+digest: sha256:43425062069ed602f0d72cef063a678f1b248a053f9df38642c9f01d565d3fa8
+generated: "2026-02-19T15:29:44.467936034-05:00"

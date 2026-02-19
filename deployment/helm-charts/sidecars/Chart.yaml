@@ -1,0 +1,13 @@
+---
+apiVersion: v2
+name: sidecars
+description: Helm chart for sidecar logging
+type: application
+version: 0.1.0
+appVersion: 0.1.0
+kubeVersion: ">=1.34.1"
+keywords: [spike, logging]
+home: https://github.com/PentheusLennuye/sidecars
+maintainers:
+  - name: George Cummings
+    email: gmc@cummings-online.ca

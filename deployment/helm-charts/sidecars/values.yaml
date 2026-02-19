@@ -1,0 +1,37 @@
+---
+global:
+  # logging defines the external logging service
+  logging:
+    # format is used only for syslog and syslog_tls and defines the message
+    # contents
+    format: rfc3164
+    # host is the FQDN of the external logging service. It is NOT a URL.
+    host: example.cummings-online.local
+    # port is the IP port that the external service listens to. It can be a
+    # string or integer
+    port: 6514
+    # protocol is the protocol used by the external logging service: syslog,
+    # syslog_tls, https, beats, otel
+    protocol: syslog_tls
+    # severity is the minimum standard syslog level: TRACE, DEBUG, INFO,
+    # WARNING, ERROR, FATAL.
+    severity: INFO
+
+sidecars:
+  image:
+    pullPolicy: Always
+    repository: gmc/sidecars
+    tag: latest
+  config:
+    # logging defines the outgoing protocol and port to the sidecar
+    logging:
+      # host is the sidecar logging container address. Of course it's 127.0.0.1
+      host: 127.0.0.1
+      # port is the sidecar logging container listening port
+      port: 5140
+# logger is the logging sidecar
+logger:
+  image:
+    pullPolicy: IfNotPresent
+    repository: fluent/fluentd
+    tag: v1.19-2
