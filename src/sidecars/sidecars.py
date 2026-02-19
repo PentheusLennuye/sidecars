@@ -62,7 +62,7 @@ def get_logger(app_name: str, environ: str, stream: str = "stderr") -> logging.L
 
 
 if __name__ == "__main__":
-    top_logger = get_logger("sidecar_test", "dev", "stderr")
+    top_logger = get_logger("sidecar_test", "dev")
     while True:
         top_logger.info("ping")
         time.sleep(5)

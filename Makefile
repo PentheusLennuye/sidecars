@@ -17,6 +17,9 @@
 # │                                Variables                                  │
 # └───────────────────────────────────────────────────────────────────────────┘
 
+# Version
+PROJECT_VERSION := $(shell grep -P "^version =" pyproject.toml | awk '{print $$3}')
+
 # Directories --------------------------------------------------------------
 
 EXAMPLES = src/examples
@@ -40,6 +43,15 @@ STOP = $(shell [ -f /etc/NIXOS ] && echo '"')
 # ┌───────────────────────────────────────────────────────────────────────────┐
 # │                                Targets                                    │
 # └───────────────────────────────────────────────────────────────────────────┘
+
+# Image ---------------------------------------------------------------------
+.PHONY: build
+build:
+	docker build . -t pentheuslennuye/sidecars:$(PROJECT_VERSION)
+
+.PHONY: push
+push:
+	docker push pentheuslennuye/sidecars:$(PROJECT_VERSION)
 
 # Environment ---------------------------------------------------------------
 
