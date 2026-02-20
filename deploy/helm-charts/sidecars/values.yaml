@@ -2,9 +2,6 @@
 global:
   # logging defines the external logging service
   logging:
-    # format is used only for syslog and syslog_tls and defines the message
-    # contents
-    format: rfc3164
     # host is the FQDN of the external logging service. It is NOT a URL.
     host: example.cummings-online.local
     # port is the IP port that the external service listens to. It can be a

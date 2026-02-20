@@ -17,7 +17,18 @@ data:
         message_format rfc5424
         time_format %Y-%m-%dT%H:%M:%S.%L%z
       </parse>
+      severity_key severity
+      facility_key facility
     </source>
     <match **>
       @type stdout
+      use_logger false
+      <format>
+        @type json
+      </format>
+      <inject>
+        time_key time
+        time_type string
+        time_format %Y-%m-%dT%H:%M:%S.%3N%z
+      </inject>
     </match>
