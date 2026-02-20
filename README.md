@@ -1,23 +1,24 @@
 ---
 date: 2026-02-19
-tags: [python]
+tags: [python, spike, kubernetes]
 author: George Cummings
 ---
 
 # Sidecars
 
-This project does this for who.
-
-Why
+This project is a sandbox for exploring Kubernetes techniques and
+patterns. A personal exploration that is not expected to generate any
+stars unless it turns into a teaching site.
 
 ## Licence
 
-The code and documentation is licensed under the Apache 2.0 licence. See the LICENSE file in the
-repository.
+The code and documentation is licensed under the Apache 2.0 licence.
+See the LICENSE file in the repository.
 
 ## Security
 
-The code security policy, including how to log an issue, is in SECURITY.md in the repository.
+The code security policy, including how to log an issue, is in
+SECURITY.md in the repository.
 
 ## Project layout
 
@@ -46,7 +47,8 @@ The code security policy, including how to log an issue, is in SECURITY.md in th
 
 ## Development
 
-A Python development environment is encoded within this repository. To use it, execute:
+A Python development environment is encoded within this repository. To
+use it, execute:
 
 ```bash
 make setup
@@ -64,8 +66,8 @@ If you want to know why coverage failed, you can run down the details.
 make detail
 ```
 
-Of course, since you are using test-driven development as a discipline, you will not need it that
-much, will you?
+Of course, since you are using test-driven development as a
+discipline, you will not need it that much, will you?
 
 ### Spell Checking
 
@@ -73,7 +75,8 @@ much, will you?
 make spellcheck
 ```
 
-If you disagree with the spell checker, add words to `setup/dictionaries/whitelist`.
+If you disagree with the spell checker, add words to
+`setup/dictionaries/whitelist`.
 
 ### Linting
 
@@ -83,8 +86,9 @@ make lint
 
 ### Version Control
 
-If you wish to confirm that you have set your version numbers against the next-higher branch in
-your development framework, run the following:
+If you wish to confirm that you have set your version numbers against
+the next-higher branch in your development framework, run the
+following:
 
 ```bash
 make version-control
@@ -94,4 +98,5 @@ It will run during `git push`, but it will only warn, not fail.
 
 ### Committing and Pushing Changes
 
-The prehooks will ensure you have run static checks before pushing to a repository.
+The pre-hooks will ensure you have run static checks before pushing to
+a repository.
