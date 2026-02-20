@@ -12,7 +12,7 @@ FROM python:${PYTHON_VER}-alpine${ALPINE_VER} AS build-image
 
 # UPDATES and BINARIES ───────────────────────────────────────────────────────────────────────────
 RUN apk --update --no-progress --no-cache upgrade
-RUN apk --no-progress --no-cache add git
+RUN apk --no-progress --no-cache add git bash
 RUN apk --no-progress --virtual .build-deps add pipx
 
 # PYTHON DEPENDENCIES ────────────────────────────────────────────────────────────────────────────
