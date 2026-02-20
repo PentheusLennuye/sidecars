@@ -18,7 +18,7 @@
 # └───────────────────────────────────────────────────────────────────────────┘
 
 # Version
-PROJECT_VERSION := $(shell grep -P "^version =" pyproject.toml | awk '{print $$3}')
+PROJECT_VERSION := $(shell grep -p "^version =" pyproject.toml | awk '{print $$3}')
 
 # Directories --------------------------------------------------------------
 
